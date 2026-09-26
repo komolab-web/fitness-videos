@@ -1,0 +1,15 @@
+{
+  "name": "muscle-map",
+  "version": "1.0.0",
+  "private": true,
+  "description": "YouTube の筋トレ・ストレッチ動画を鍛えたい部位別にまとめた静的サイト",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "merge": "node scripts/merge-videos.mjs",
+    "verify": "node scripts/verify-videos.mjs",
+    "discover": "node scripts/discover-videos.mjs",
+    "search": "node scripts/search-youtube.mjs"
+  },
+  "engines": { "node": ">=22" }
+}

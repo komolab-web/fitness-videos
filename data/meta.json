@@ -1,0 +1,136 @@
+{
+  "parts": [
+    {
+      "slug": "chest",
+      "name": "胸",
+      "nameEn": "CHEST",
+      "group": "upper",
+      "muscles": [
+        "大胸筋（上部・中部・下部）"
+      ],
+      "desc": "腕立て伏せ・ベンチプレス・ダンベルフライなど。厚い胸板づくりやバストアップに。"
+    },
+    {
+      "slug": "back",
+      "name": "背中",
+      "nameEn": "BACK",
+      "group": "upper",
+      "muscles": [
+        "広背筋",
+        "僧帽筋",
+        "脊柱起立筋"
+      ],
+      "desc": "懸垂・ローイング・ラットプルダウンなど。逆三角形の背中や姿勢改善、背中の引き締めに。"
+    },
+    {
+      "slug": "shoulders",
+      "name": "肩",
+      "nameEn": "SHOULDERS",
+      "group": "upper",
+      "muscles": [
+        "三角筋（前部・中部・後部）"
+      ],
+      "desc": "サイドレイズ・ショルダープレスなど。肩幅を広く見せたい人に。肩こり解消のストレッチも。"
+    },
+    {
+      "slug": "arms",
+      "name": "腕",
+      "nameEn": "ARMS",
+      "group": "upper",
+      "muscles": [
+        "上腕二頭筋",
+        "上腕三頭筋（二の腕）",
+        "前腕"
+      ],
+      "desc": "アームカール・トライセプスエクステンションなど。太い腕づくりや二の腕の引き締めに。"
+    },
+    {
+      "slug": "abs",
+      "name": "腹筋・体幹",
+      "nameEn": "ABS & CORE",
+      "group": "core",
+      "muscles": [
+        "腹直筋",
+        "腹斜筋",
+        "腹横筋"
+      ],
+      "desc": "クランチ・プランク・レッグレイズなど。シックスパック、くびれ、ぽっこり下腹の解消に。"
+    },
+    {
+      "slug": "legs",
+      "name": "脚",
+      "nameEn": "LEGS",
+      "group": "lower",
+      "muscles": [
+        "大腿四頭筋",
+        "ハムストリング",
+        "内転筋",
+        "ふくらはぎ"
+      ],
+      "desc": "スクワット・ランジ・レッグプレスなど。体の中で大きな筋肉が集まる部位で、代謝アップや脚やせにも。"
+    },
+    {
+      "slug": "glutes",
+      "name": "お尻",
+      "nameEn": "GLUTES",
+      "group": "lower",
+      "muscles": [
+        "大臀筋",
+        "中臀筋"
+      ],
+      "desc": "ヒップスラスト・ブルガリアンスクワットなど。ヒップアップや骨盤まわりの安定に。"
+    },
+    {
+      "slug": "fullbody",
+      "name": "全身",
+      "nameEn": "FULL BODY",
+      "group": "full",
+      "muscles": [
+        "全身の筋肉",
+        "心肺機能"
+      ],
+      "desc": "全身をまとめて動かすサーキット・HIIT・通しのストレッチ。時間が無い日や脂肪燃焼に。"
+    }
+  ],
+  "groups": {
+    "upper": "上半身",
+    "core": "体幹",
+    "lower": "下半身",
+    "full": "全身"
+  },
+  "equips": [
+    {
+      "slug": "bodyweight",
+      "name": "自重",
+      "nameEn": "BODYWEIGHT",
+      "desc": "器具なし・自宅でできる"
+    },
+    {
+      "slug": "dumbbell",
+      "name": "ダンベル",
+      "nameEn": "DUMBBELL",
+      "desc": "ダンベル・ケトルベル"
+    },
+    {
+      "slug": "gym",
+      "name": "ジム",
+      "nameEn": "GYM",
+      "desc": "マシン・バーベル・ケーブル"
+    },
+    {
+      "slug": "stretch",
+      "name": "ストレッチ",
+      "nameEn": "STRETCH",
+      "desc": "ストレッチ・ヨガ・セルフケア"
+    }
+  ],
+  "tags": {
+    "beginner": "初心者",
+    "hard": "ハード",
+    "explain": "解説",
+    "fatburn": "脂肪燃焼",
+    "quiet": "静かにできる",
+    "women": "女性向け"
+  },
+  "updatedAt": "2026-09-27"
+}

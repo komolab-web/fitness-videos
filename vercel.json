@@ -1,0 +1,12 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "",
+  "buildCommand": "rm -rf _site && mkdir -p _site/data && cp -r index.html assets _site/ && cp data/meta.json data/videos.json _site/data/",
+  "outputDirectory": "_site",
+  "trailingSlash": false,
+  "rewrites": [{ "source": "/((?!assets/|data/).*)", "destination": "/index.html" }],
+  "headers": [
+    { "source": "/data/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }] }
+  ]
+}

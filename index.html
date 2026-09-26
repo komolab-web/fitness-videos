@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>部位別トレーニング動画まとめ｜胸・背中・腹筋・脚・お尻 | MUSCLE MAP</title>
+  <meta name="description" content="YouTube の筋トレ・ストレッチ動画を、鍛えたい部位別にまとめたサイト。胸・背中・肩・腕・腹筋・脚・お尻・全身を、自重（自宅）・ダンベル・ジム・ストレッチの種類、初心者向け・脂肪燃焼・静かにできるなどのタグ、動画の長さで絞り込んで、その場で再生できます。">
+  <meta name="theme-color" content="#111214">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="部位別トレーニング動画まとめ | MUSCLE MAP">
+  <meta property="og:description" content="YouTube の筋トレ・ストレッチ動画を、鍛えたい部位別にまとめたサイト。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script>
+    // テーマ（ライト / ダーク）は描画前に反映して、ちらつきを防ぐ
+    try {
+      const t = localStorage.getItem('mm-theme');
+      if (t) document.documentElement.dataset.theme = t;
+    } catch {}
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text">
+        <span class="brand-title">MUSCLE MAP</span>
+        <span class="brand-sub">部位別トレーニング動画まとめ</span>
+      </span>
+    </a>
+    <div class="header-right">
+      <p class="header-stats" id="header-stats"></p>
+      <button type="button" class="icon-btn" id="theme-toggle" aria-label="ライト / ダークを切り替え" title="ライト / ダークを切り替え">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <nav class="view-tabs" id="view-tabs" role="tablist" aria-label="表示"></nav>
+
+    <section class="hero" aria-label="部位を選ぶ">
+      <div class="bodymap" id="bodymap"></div>
+      <div class="hero-side">
+        <div class="hero-info" id="hero-info" aria-live="polite"></div>
+        <nav class="part-list" id="part-list" aria-label="部位"></nav>
+      </div>
+    </section>
+
+    <div class="channel-row" id="channel-row" hidden>
+      <p class="row-label">チャンネルで絞り込む</p>
+      <div class="scroller">
+        <nav class="channel-chips" id="channel-chips" aria-label="チャンネル"></nav>
+      </div>
+    </div>
+
+    <div class="scroller">
+      <nav class="equip-tabs" id="equip-tabs" role="tablist" aria-label="種類"></nav>
+    </div>
+
+    <section class="toolbar" aria-label="絞り込み">
+      <div class="chips" id="tag-chips"></div>
+      <div class="toolbar-row">
+        <div class="segmented" id="duration-filter" role="radiogroup" aria-label="長さ"></div>
+        <div class="segmented" id="lang-filter" role="radiogroup" aria-label="言語">
+          <button type="button" data-lang="" aria-pressed="true">すべて</button>
+          <button type="button" data-lang="ja" aria-pressed="false">日本語</button>
+          <button type="button" data-lang="en" aria-pressed="false">English</button>
+        </div>
+        <label class="select">
+          <span class="visually-hidden">並び順</span>
+          <select id="sort">
+            <option value="views">人気順</option>
+            <option value="new">新しい順</option>
+            <option value="short">短い順</option>
+            <option value="long">長い順</option>
+          </select>
+        </label>
+        <input class="search" id="search" type="search" placeholder="タイトル・チャンネルで検索" aria-label="検索">
+      </div>
+    </section>
+
+    <div class="result-row">
+      <p class="result-count" id="result-count"></p>
+      <div class="segmented segmented-sm" id="open-mode" role="radiogroup" aria-label="動画の開き方">
+        <button type="button" data-mode="site" aria-pressed="true">サイト内で再生</button>
+        <button type="button" data-mode="youtube" aria-pressed="false">YouTube で開く</button>
+      </div>
+    </div>
+    <section class="video-grid" id="video-grid"></section>
+    <div class="more-row"><button type="button" class="btn btn-ghost" id="more" hidden>もっと見る</button></div>
+  </main>
+
+  <footer class="site-footer">
+    <p>動画の権利は各投稿者に帰属します。動画は YouTube の埋め込み機能で表示しています。</p>
+    <p>トレーニングは体調に合わせて無理のない範囲で行ってください。痛みや持病がある場合は医師・専門家に相談してください。</p>
+    <p class="footer-meta" id="footer-meta"></p>
+  </footer>
+
+  <dialog class="player" id="player">
+    <div class="player-inner">
+      <div class="player-frame"><iframe id="player-iframe" title="YouTube 動画" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <div class="player-info">
+        <div>
+          <h2 id="player-title"></h2>
+          <p id="player-channel"></p>
+        </div>
+        <div class="player-stuck" id="player-stuck" hidden>
+          <p>再生が始まらないときや「bot ではないことを確認」と出るときは、YouTube で開いてください（スマホはアプリで開きます）。</p>
+          <div class="player-stuck-actions">
+            <a id="player-stuck-link" class="btn" target="_blank" rel="noopener">YouTube で開く</a>
+            <label class="player-stuck-remember"><input type="checkbox" id="always-youtube"> 次からは最初から YouTube で開く</label>
+          </div>
+        </div>
+        <div class="player-actions">
+          <a id="player-link" class="btn" target="_blank" rel="noopener">YouTube で開く</a>
+          <button type="button" class="btn btn-ghost" id="player-close" autofocus>閉じる</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script type="module" src="/assets/js/main.js"></script>
+</body>
+</html>
