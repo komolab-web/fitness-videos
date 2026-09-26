@@ -19,7 +19,16 @@ YouTube の筋トレ・ストレッチ動画を、**鍛えたい部位別**に�
 npm run dev   # http://localhost:5173 で起動（依存パッケージなし。PORT で変更可）
 ```
 
-`fetch` で JSON を読むため、`index.html` を直接開くのではなく HTTP サーバー経由で表示してください。Vercel などにそのまま置けます（`vercel.json` で `/chest` のような URL を `index.html` に振り向けています）。
+`fetch` で JSON を読むため、`index.html` を直接開くのではなく HTTP サーバー経由で表示してください。
+
+## 公開
+
+main に push すると次の 2 か所に自動で公開されます。どちらも `npm run build`（`scripts/build-site.mjs`）で公開用ファイルだけを `_site/` にまとめています。
+
+- **GitHub Pages**：https://komolab-web.github.io/fitness-videos/（`.github/workflows/pages.yml`）。サイトが `/fitness-videos/` の下に置かれるので、`BASE_PATH=/fitness-videos/` でビルドして `index.html` の `<base>` を書き換えます。`/chest` のような URL は `404.html`（`index.html` と同じ中身）で表示します。
+- **Vercel**：https://fitness-videos.vercel.app/（`vercel.json`）。`/chest` のような URL は rewrites で `index.html` に振り向けています。
+
+ページ内のパスは `<base>` からの相対パスで書いてください（`/assets/...` のような絶対パスにしない）。
 
 ## データの更新
 
@@ -71,7 +80,8 @@ data/channels.json      新着を見に行くチャンネル
 data/videos.json        動画一覧（生成物）
 data/sources/*.json     動画の元データ（ここを編集する）
 data/research/          最初の調査で使ったクエリ・生データ・選定スクリプト
-scripts/                データ生成・検証・開発サーバー
+scripts/                データ生成・検証・ビルド・開発サーバー
+.github/workflows/      GitHub Pages への公開
 docs/RESEARCH.md        調査メモ
 ```
 

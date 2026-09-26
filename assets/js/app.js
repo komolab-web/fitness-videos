@@ -46,13 +46,17 @@ const TAGS = meta.tags;
 const state = { view: 'part', part: ALL, equip: ALL, channel: '', tags: new Set(), dur: '', lang: '', sort: 'views', query: '', limit: PAGE };
 
 /* ---------- ルーティング: /<part>/<equip>、特集は /<feature>/<part>/<equip> ---------- */
+// サイトを置いている場所（Vercel は /、GitHub Pages は /fitness-videos/）。index.html の <base> から取る
+const BASE = new URL(document.baseURI).pathname;
 function routePath({ view, part, equip }) {
   const segs = [part, equip === ALL ? '' : equip];
   if (!segs[1] && part === ALL) segs[0] = '';
-  return `/${[view === 'part' ? '' : view, ...segs].filter(Boolean).join('/')}`;
+  return `${BASE}${[view === 'part' ? '' : view, ...segs].filter(Boolean).join('/')}`;
 }
 function readRoute() {
-  let segs = decodeURI(location.pathname).replace(/^\/+|\/+$/g, '').split('/').filter(Boolean);
+  let path = decodeURI(location.pathname);
+  if (path.startsWith(BASE)) path = path.slice(BASE.length);
+  let segs = path.replace(/^\/+|\/+$/g, '').split('/').filter(Boolean);
   state.view = 'part';
   if (FEATURES[segs[0]]) {
     state.view = segs[0];
