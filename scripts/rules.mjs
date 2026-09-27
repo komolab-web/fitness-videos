@@ -3,13 +3,13 @@
 // 部位
 export const PART_RULES = {
   chest: /胸|大胸筋|バストアップ|腕立て|プッシュアップ|ベンチプレス|ディップス|\bchest\b|\bpecs?\b|push[\s-]?ups?|bench press/i,
-  back: /背中|背筋|広背筋|僧帽筋|脊柱起立筋|懸垂|チンニング|ラットプル|ローイング|デッドリフト|\bback\b(?! pain)|\blats?\b|pull[\s-]?ups?|chin[\s-]?ups?|\brows?\b|deadlift/i,
-  shoulders: /肩|三角筋|ショルダー|サイドレイズ|\bshoulders?\b|\bdelts?\b|lateral raise/i,
+  back: /背中|背筋|腰痛|腰の|腰まわり|猫背|反り腰|広背筋|僧帽筋|脊柱起立筋|懸垂|チンニング|ラットプル|ローイング|デッドリフト|\bback\b|\blats?\b|posture|pull[\s-]?ups?|chin[\s-]?ups?|\brows?\b|deadlift/i,
+  shoulders: /肩|三角筋|ショルダー|サイドレイズ|首[こコ][りリ]|首凝り|首の痛み|首の筋肉|首まわり|首周り|首肩|ストレートネック|スマホ首|\bshoulders?\b|\bdelts?\b|lateral raise|neck pain|stiff neck|tech neck|text neck/i,
   arms: /(?<!二の|凄)腕(?!立|前)|二の腕|二頭|三頭|上腕|力こぶ|前腕|\barms?\b|biceps?|triceps?|forearms?|\bcurls?\b/i,
   abs: /腹筋|腹斜筋|下腹|お腹|おなか|体幹|くびれ|シックスパック|プランク|ウエスト|\babs?\b|\bcore\b|six[\s-]?pack|\bplanks?\b|belly|oblique/i,
   legs: /脚|太もも|もも|ふくらはぎ|下半身|スクワット|ハムストリング|大腿|ランジ|\blegs?\b|thighs?|quads?\b|hamstrings?|calf|calves|squats?\b|lunges?/i,
-  glutes: /お尻|尻|臀|ヒップ|\bglutes?\b|\bbutt\b|booty|hip thrusts?/i,
-  face: /顔痩せ|顔やせ|小顔|二重あご|二重顎|フェイスライン|表情筋|顔ヨガ|フェイスヨガ|顔筋|ほうれい線|エラ張り|顔の?たるみ|顔の?むくみ|\bface\b(?![\s-]?pulls?)|facial|double chin|jawline|cheeks?\b/i,
+  glutes: /お尻|おしり|尻|臀|ヒップ|股関節|腸腰筋|hip flexors?|hip mobility|\bhips\b|\bglutes?\b|\bbutt\b|booty|hip thrusts?/i,
+  face: /顔痩せ|顔やせ|小顔|二重あご|二重顎|フェイスライン|表情筋|顔ヨガ|フェイスヨガ|顔筋|ほうれい線|エラ張り|顔の?たるみ|顔の?むくみ|頬痩せ|頬肉|アゴ痩せ|顎痩せ|口元痩せ|下膨れ|輪郭|フェイスリフト|顔の脂肪|顔の?リンパ|お顔|全顔|バッカルファット|エラほぐし|gua ?sha|de-?puff|\bface\b(?![\s-]?pulls?)|facial|double chin|jawline|cheeks?\b/i,
   fullbody: /全身|full[\s-]?body|total[\s-]?body/i,
 };
 // 二の腕は「腕」として拾う（上の否定後読みは「二の腕」を二重に数えないため。「凄腕」「腕前」は部位ではない）
@@ -54,6 +54,7 @@ export const TAG_RULES = {
   hard: /上級|地獄|鬼|限界|キツ|きつ|追い込|advanced|intense|hardcore|killer/i,
   explain: /解説|フォーム|やり方|方法|コツ|科学|理論|間違|効かせ|ポイント|science|\bform\b|mistakes?|how to|explained|\btips\b|technique|(?-i:NG)/i,
   fatburn: /脂肪燃焼|痩せ|やせ|ダイエット|HIIT|燃焼|有酸素|fat[\s-]?burn|weight[\s-]?loss|calories?|cardio|hiit/i,
+  desk: /デスクワーク|座ったまま|座りながら|椅子|イスに|イスで|オフィス|仕事中|仕事の合間|在宅|テレワーク|パソコン|スマホ首|肩[こコ][りリ]|肩凝り|首[こコ][りリ]|首凝り|腰痛|猫背|ストレートネック|巻き肩|反り腰|眼精疲労|\bdesk\b|office|chair|seated|sitting|tech neck|text neck|neck pain|back pain|posture/i,
   quiet: /マンション|音が出ない|音を立てない|静か|ジャンプなし|ドンドンしない|no[\s-]?jump|quiet|apartment/i,
   women: /女性|女子|レディース|women|girls?\b|female/i,
 };
@@ -70,5 +71,7 @@ export function partsOf(title) {
   // 全身と書いてあるか、3 部位以上にまたがるものは「全身」にまとめる（顔は体とは別に数える）
   const body = hit.filter((p) => p !== 'face');
   if (hit.includes('fullbody') || body.length >= 3) return ['fullbody'];
+  // 「寝る前ストレッチ」「デスクワークの疲れをとる」のように部位が書かれていないストレッチは全身として扱う
+  if (!hit.length && (TAG_RULES.desk.test(t) || EQUIP_RULES.stretch.test(t))) return ['fullbody'];
   return hit;
 }

@@ -11,6 +11,11 @@ const FEATURES = {
     desc: '人気のトレーニング系 YouTube チャンネルごとに見られます。チャンネルを選ぶとその動画だけに絞れます。',
     match: () => true,
   },
+  desk: {
+    name: 'デスクワーク',
+    desc: '肩こり・首こり・腰痛・猫背など、座りっぱなしで固まった体をほぐすストレッチ。椅子に座ったままできるものもあります。',
+    match: (v) => v.tags.includes('desk'),
+  },
   shorts: {
     name: 'ショート',
     desc: '1 種目のフォームやコツを数十秒で確認できる YouTube ショートです。',
@@ -273,6 +278,7 @@ function render(push = false) {
   renderFilters();
   renderGrid();
   requestAnimationFrame(() => {
+    revealSelected($('#view-tabs'));
     revealSelected($('#equip-tabs'));
     revealSelected($('#channel-chips'));
   });

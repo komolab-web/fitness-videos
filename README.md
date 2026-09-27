@@ -4,9 +4,9 @@ YouTube の筋トレ・ストレッチ動画を、**鍛えたい部位別**に�
 
 - 顔・胸・背中・肩・腕・腹筋/体幹・脚・お尻・全身の 9 部位。**人体図（前・後ろ）をタップ**するか、ボタンで選べます（顔は前面の頭）
 - 2 段目で種類（自重／ダンベル／ジム／ストレッチ）を選べます
-- 「初心者・ハード・解説・脂肪燃焼・静かにできる・女性向け」のタグ、長さ（〜5 分／5〜15 分／15〜30 分／30 分〜）、言語、キーワードで絞り込めます
+- 「初心者・ハード・解説・脂肪燃焼・静かにできる・デスクワーク・女性向け」のタグ、長さ（〜5 分／5〜15 分／15〜30 分／30 分〜）、言語、キーワードで絞り込めます
 - 並び順: 人気順（再生数）／新しい順／短い順／長い順
-- 「チャンネル別」「ショート」の特集タブ
+- 「チャンネル別」「デスクワーク」「ショート」の特集タブ（デスクワークは肩こり・首こり・腰痛・猫背・座ったままできるストレッチなど）
 - 動画はサイト内のモーダルで再生（再生が始まらないときは「YouTube で開く」を案内。最初から YouTube で開くようにも切り替え可）
 - URL は `/chest/dumbbell`、`/shorts/abs`、`/channels/glutes?c=MadFit` のように表示状態を持つので、そのまま共有できます
 - 見る人の多くが女性なので、黒を使わないポップなデザイン（水玉の背景、部位ごとの色、丸い書体）。部位の色は `assets/css/style.css` の `[data-part]` で決めています。ダークは切り替えボタンを押したときだけ（端末の設定では切り替えない）。スマホ対応
@@ -63,6 +63,7 @@ main に push すると次の 2 か所に自動で公開されます。どちら
 node data/research/collect.mjs ./queries.mjs raw.jsonl     # 検索（1 回目のクエリ）
 node data/research/collect.mjs ./queries2.mjs raw2.jsonl   # 検索（2 回目のクエリ）
 node data/research/collect.mjs ./queries-face.mjs raw-face.jsonl  # 検索（顔痩せ・小顔の追加分）
+node data/research/collect.mjs ./queries-stretch.mjs raw-stretch.jsonl  # 検索（ストレッチ・デスクワーク向けの追加分）
 node data/research/enrich.mjs                              # oEmbed で正式なタイトル・ショート判定
 node data/research/select.mjs                              # 基準で選んで data/sources/search.json を作る
 npm run merge

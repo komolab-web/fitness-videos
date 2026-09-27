@@ -9,7 +9,7 @@ const MIN_VIEWS = { ja: 30_000, en: 150_000 };
 const EXCLUDE = /食事|プロテイン|サプリ|レシピ|what i eat|meal|recipe|vlog|ドッキリ|反応|リアクション|手術|ランキング|\breacts?\b|supplement|整形|美容外科|クリニック|脂肪吸引|糸リフト|ハイフ|HIFU|ボトックス|メイク|美顔器|surgery|filler|botox|makeup|make-up|サブリミナル|subliminal|今すぐやめて|の真実/i;
 
 const rows = [];
-for (const f of ['raw.jsonl', 'raw2.jsonl', 'raw-face.jsonl'])
+for (const f of ['raw.jsonl', 'raw2.jsonl', 'raw-face.jsonl', 'raw-stretch.jsonl'])
   rows.push(...(await readFile(new URL(f, import.meta.url), 'utf8')).trim().split('\n').map((l) => JSON.parse(l)));
 
 // 「6 年前」→ おおよその年月（YYYY-MM）
@@ -28,7 +28,7 @@ function approxDate(rel) {
 
 
 // フィットネスの解説・メニューではないチャンネル（エンタメ・切り抜き・雑学・モチベーション動画など）
-const EXCLUDE_CHANNELS = /はじめしゃちょー|青春がーどまん|ぷろたん日記|雑学|切り抜き|Clips$|Motivation|BroScienceLife|PIVOT|世界の筋肉|Virtual Hand Care|fitness in gym/i;
+const EXCLUDE_CHANNELS = /はじめしゃちょー|青春がーどまん|ぷろたん日記|雑学|切り抜き|Clips$|Motivation|BroScienceLife|PIVOT|世界の筋肉|Virtual Hand Care|fitness in gym|NEWS/i;
 
 const byId = new Map();
 for (const r of rows) {
