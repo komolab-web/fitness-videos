@@ -4,7 +4,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 const cachePath = new URL('oembed.json', import.meta.url);
 const cache = JSON.parse(await readFile(cachePath, 'utf8').catch(() => '{}'));
 const rows = [];
-for (const f of ['raw.jsonl', 'raw2.jsonl'])
+for (const f of ['raw.jsonl', 'raw2.jsonl', 'raw-face.jsonl'])
   rows.push(...(await readFile(new URL(f, import.meta.url), 'utf8')).trim().split('\n').map((l) => JSON.parse(l)));
 const ids = [...new Set(rows.map((r) => r.id))].filter((id) => !cache[id]);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

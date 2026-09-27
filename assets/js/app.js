@@ -401,10 +401,7 @@ for (const wrap of document.querySelectorAll('.scroller')) {
 
 /* ---------- テーマ ---------- */
 $('#theme-toggle').addEventListener('click', () => {
-  const dark = document.documentElement.dataset.theme
-    ? document.documentElement.dataset.theme === 'dark'
-    : matchMedia('(prefers-color-scheme: dark)').matches;
-  const next = dark ? 'light' : 'dark';
+  const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
   document.documentElement.dataset.theme = next;
   try {
     localStorage.setItem('mm-theme', next);

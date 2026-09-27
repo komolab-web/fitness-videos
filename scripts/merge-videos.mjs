@@ -3,7 +3,7 @@
 // 部位・種類を書いていないものはタイトルから推定し、タグはタイトルから推定したものに sources の "tags" を足す。
 // 使い方: node scripts/merge-videos.mjs
 import { readdir, readFile, writeFile } from 'node:fs/promises';
-import { TAG_RULES, partsOf, inferEquip } from './rules.mjs';
+import { TAG_RULES, partsOf, inferEquip, normalizeTitle } from './rules.mjs';
 
 const root = new URL('../data/', import.meta.url);
 const meta = JSON.parse(await readFile(new URL('meta.json', root), 'utf8'));
@@ -30,7 +30,8 @@ for (const file of files) {
     const prev = byId.get(e.youtubeId);
     byId.set(e.youtubeId, {
       id: e.youtubeId,
-      title: e.title,
+      // 濁点が分かれた文字のままだとサイト内の検索に引っかからないので、表示用にもそろえておく
+      title: e.title.normalize('NFC'),
       channel: e.channel,
       lang: e.lang,
       parts: union(prev?.parts, parts),
@@ -48,7 +49,7 @@ const videos = [...byId.values()]
   .map(({ extraTags, ...v }) => ({
     ...v,
     tags: Object.entries(TAG_RULES)
-      .filter(([tag, re]) => re.test(v.title) || extraTags.includes(tag))
+      .filter(([tag, re]) => re.test(normalizeTitle(v.title)) || extraTags.includes(tag))
       .map(([tag]) => tag),
   }))
   .sort((a, b) => b.views - a.views);

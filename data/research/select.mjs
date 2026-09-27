@@ -6,10 +6,10 @@ const oembed = JSON.parse(await readFile(new URL('oembed.json', import.meta.url)
 
 const TODAY = new Date('2026-09-27');
 const MIN_VIEWS = { ja: 30_000, en: 150_000 };
-const EXCLUDE = /食事|プロテイン|サプリ|レシピ|what i eat|meal|recipe|vlog|ドッキリ|反応|リアクション|手術|ランキング|\breacts?\b|supplement/i;
+const EXCLUDE = /食事|プロテイン|サプリ|レシピ|what i eat|meal|recipe|vlog|ドッキリ|反応|リアクション|手術|ランキング|\breacts?\b|supplement|整形|美容外科|クリニック|脂肪吸引|糸リフト|ハイフ|HIFU|ボトックス|メイク|美顔器|surgery|filler|botox|makeup|make-up|サブリミナル|subliminal|今すぐやめて|の真実/i;
 
 const rows = [];
-for (const f of ['raw.jsonl', 'raw2.jsonl'])
+for (const f of ['raw.jsonl', 'raw2.jsonl', 'raw-face.jsonl'])
   rows.push(...(await readFile(new URL(f, import.meta.url), 'utf8')).trim().split('\n').map((l) => JSON.parse(l)));
 
 // 「6 年前」→ おおよその年月（YYYY-MM）
@@ -50,7 +50,8 @@ for (const r of rows) {
     channelId: r.channelId,
     lang,
     parts,
-    equip: inferEquip(r.title, r.channel),
+    // 顔のエクササイズは器具を使わないので、タイトルに種類が無ければ自重にする
+    equip: inferEquip(r.title, r.channel).concat(parts.includes('face') && !inferEquip(r.title, r.channel).length ? ['bodyweight'] : []),
     short: o.short || undefined,
     duration: r.duration,
     views: r.views,

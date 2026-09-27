@@ -12,10 +12,10 @@ const ellipsePair = (part, cx, cy, rx, ry, label) => ellipse(part, cx, cy, rx, r
 const path = (part, d, label) =>
   `<path class="${part ? 'muscle' : 'body'}" ${part ? `data-part="${part}"` : ''} d="${d}">${label ? `<title>${label}</title>` : ''}</path>`;
 
-// 頭・首・手・足など、部位に当たらないところ
-const base = () =>
+// 頭・首・手・足など、部位に当たらないところ（前面の頭は「顔」として選べる）
+const base = (face) =>
   [
-    ellipse('', 60, 19, 12, 14),
+    face ? ellipse('face', 60, 19, 12, 14, '顔（表情筋・フェイスライン）') : ellipse('', 60, 19, 12, 14),
     rect('', 54, 31, 12, 10, 3),
     ellipsePair('', 23, 136, 5, 6),
     rect('', 44, 108, 32, 18, 6),
@@ -24,7 +24,7 @@ const base = () =>
 
 const front = () =>
   [
-    base(),
+    base(true),
     ellipsePair('shoulders', 35, 50, 11, 9, '肩（三角筋）'),
     pair('chest', 41, 43, 18, 22, 6, '胸（大胸筋）'),
     rect('abs', 45, 68, 30, 38, 7, '腹筋・体幹'),
