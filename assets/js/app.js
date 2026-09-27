@@ -144,6 +144,8 @@ function renderHero() {
   const n = pool.filter(matchesPart).length;
   const p = partBySlug.get(state.part);
   const feature = FEATURES[state.view];
+  // 選んでいる部位の色をページのアクセントに使う（style.css の :root[data-part]）
+  document.documentElement.dataset.part = state.part;
   const kicker = feature ? `${feature.name}${state.channel ? ` ／ ${esc(state.channel)}` : ''}` : 'BODY PART';
   $('#hero-info').innerHTML = p
     ? `<p class="hero-kicker">${kicker}</p>
@@ -216,7 +218,7 @@ function renderFilters() {
 }
 
 function videoCard(v) {
-  const parts = state.part === ALL ? v.parts.map((p) => `<span class="tag tag-part">${esc(partBySlug.get(p).name)}</span>`).join('') : '';
+  const parts = state.part === ALL ? v.parts.map((p) => `<span class="tag tag-part" data-part="${p}">${esc(partBySlug.get(p).name)}</span>`).join('') : '';
   const equips = state.equip === ALL ? v.equip.map((e) => `<span class="tag tag-equip">${esc(equipBySlug.get(e).name)}</span>`).join('') : '';
   const tags = v.tags.map((t) => `<span class="tag">${TAGS[t]}</span>`).join('');
   return `
