@@ -8,9 +8,44 @@
   <meta name="description" content="YouTube の筋トレ・ストレッチ動画を、鍛えたい部位別にまとめたサイト。胸・背中・肩・腕・腹筋・脚・お尻・全身を、自重（自宅）・ダンベル・ジム・ストレッチの種類、初心者向け・脂肪燃焼・静かにできるなどのタグ、動画の長さで絞り込んで、その場で再生できます。">
   <meta name="theme-color" content="#fff6f9">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <!-- 公開先が 2 か所（Vercel・GitHub Pages）あるので、正規 URL は Vercel にそろえる。部位などのページでは app.js が書き換える -->
+  <link rel="canonical" href="https://fitness-videos.vercel.app/">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MUSCLE MAP">
+  <meta property="og:url" content="https://fitness-videos.vercel.app/">
   <meta property="og:title" content="部位別トレーニング動画まとめ | MUSCLE MAP">
   <meta property="og:description" content="YouTube の筋トレ・ストレッチ動画を、鍛えたい部位別にまとめたサイト。">
+  <meta property="og:image" content="https://fitness-videos.vercel.app/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="MUSCLE MAP">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://fitness-videos.vercel.app/#website",
+          "url": "https://fitness-videos.vercel.app/",
+          "name": "MUSCLE MAP",
+          "alternateName": "部位別トレーニング動画まとめ",
+          "inLanguage": "ja"
+        },
+        {
+          "@type": "CollectionPage",
+          "@id": "https://fitness-videos.vercel.app/#webpage",
+          "url": "https://fitness-videos.vercel.app/",
+          "name": "部位別トレーニング動画まとめ｜胸・背中・腹筋・脚・お尻 | MUSCLE MAP",
+          "description": "YouTube の筋トレ・ストレッチ動画を、鍛えたい部位別にまとめたサイト。胸・背中・肩・腕・腹筋・脚・お尻・全身を、自重（自宅）・ダンベル・ジム・ストレッチの種類、初心者向け・脂肪燃焼・静かにできるなどのタグ、動画の長さで絞り込んで、その場で再生できます。",
+          "inLanguage": "ja",
+          "isPartOf": { "@id": "https://fitness-videos.vercel.app/#website" },
+          "primaryImageOfPage": { "@type": "ImageObject", "url": "https://fitness-videos.vercel.app/assets/og-image.png", "width": 1200, "height": 630 }
+        }
+      ]
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=M+PLUS+Rounded+1c:wght@500;700;800&family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
@@ -46,7 +81,11 @@
     <section class="hero" aria-label="部位を選ぶ">
       <div class="bodymap" id="bodymap"></div>
       <div class="hero-side">
-        <div class="hero-info" id="hero-info" aria-live="polite"></div>
+        <!-- JS が動く前（クローラーなど）にも h1 があるように、トップの表示を先に入れておく。app.js の renderHero が上書きする -->
+        <div class="hero-info" id="hero-info" aria-live="polite">
+          <p class="hero-kicker">BODY PART</p>
+          <h1 class="hero-title"><span class="hero-en">PICK A MUSCLE</span><span class="hero-ja">鍛えたい部位を選ぼう</span></h1>
+        </div>
         <nav class="part-list" id="part-list" aria-label="部位"></nav>
       </div>
     </section>
