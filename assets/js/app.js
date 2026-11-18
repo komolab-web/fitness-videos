@@ -3,6 +3,7 @@ import { bodyMapSvg } from './bodymap.js';
 const ALL = 'all';
 const PAGE = 48;
 const SITE_NAME = 'MUSCLE MAP';
+const SITE_URL = 'https://fitness-videos.vercel.app/';
 
 // 部位別とは別に、横断して見られる特集
 const FEATURES = {
@@ -266,6 +267,10 @@ function setMeta(count) {
     state.view === 'part' && !p && !e
       ? `部位別トレーニング動画まとめ｜胸・背中・腹筋・脚・お尻 | ${SITE_NAME}`
       : `${feature}${what}のトレーニング動画 ${count}本 | ${SITE_NAME}`;
+  // 正規 URL は Vercel 側にそろえる（GitHub Pages で見ているときも）
+  const canonical = `${SITE_URL}${routePath(state).slice(BASE.length)}`;
+  $('link[rel="canonical"]')?.setAttribute('href', canonical);
+  $('meta[property="og:url"]')?.setAttribute('content', canonical);
 }
 
 function render(push = false) {
